@@ -1,0 +1,98 @@
+<!-- 
+  This file is a basic Bootstrap modal for lifeforcebooks users to signup
+  
+  note: this is just chunks of code from the full page
+-->
+
+
+<!-- grabs the desired fonts from google -->
+<link href="https://fonts.googleapis.com/css?family=Aclonica|Libre+Baskerville" rel="stylesheet">
+
+<!-- a few css style rules for the modal -->
+<style>
+		.modal-header {
+			border-bottom: none;
+		}
+		
+		#newsletter {
+			background-image: url("/EnvSignUp-Plain.jpg");
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 100% auto;
+		}
+		
+		#newsletter p, #newsletter h4 {
+			text-align: center;
+		}
+		
+		#goRed {
+			color: red;
+			font-family: 'Aclonica', sans-serif;
+		}
+		
+		#goBlack {
+			color: black;
+			font-family: 'Libre Baskerville', serif;
+		}
+</style>
+
+    <!-- the definition of the bootstrap modal -->
+
+    <!-- Modal -->
+		<div id="myModal" class="modal fade" role="dialog">
+		    <div class="modal-dialog">
+		        <!-- Modal content-->
+		        <div class="modal-content" id="newsletter">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal">×</button>
+		                <h4 class="modal-title" id="goBlack">TO RECEIVE EXCLUSIVE CONTENT<br />AND DISCOUNTS</h4>
+						<h4 class="modal-title" id="goRed">Sign Up For Our Monthly Newsletter</h4>
+		            </div>
+		            <div class="modal-body">
+						<br />
+		                <form role="form" action="success.php" onSubmit="return writeCookie()" method="post">
+							<div class="form-group">
+							<input type="text" class="form-control" id="fname" name="first_name" placeholder="First Name" required="required"/></div>
+							<div class="form-group">
+							<input type="text" class="form-control" id="lname" name="last_name" placeholder="Last Name" required="required"/></div>
+		                    <div class="form-group">
+							<div class="input-group">
+		                         <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required="required"/>
+							 <span class="input-group-btn">
+		                    <button type="submit" class="btn btn-danger">Submit</button>
+		                	 </span>
+							</div></div>
+						</form>
+						<br /><br />
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		
+    
+    <!-- a jquery script which checks if the mailingList cookie exists
+         if it doesn't, then the modal will show when the page loads
+    -->
+		<script>
+		$(document).ready(function(){
+			var onList = getCookie("mailingList");
+			if(onList == "") {
+				$('#myModal').modal('show');
+			}
+		});
+		</script>
+		
+    <!--
+      when the form is submitted or the modal is closed, a cookie is created
+      so that the modal will not pop up again once you've already seen it
+    -->
+		<script>
+			$(document).ready(function() { 
+				$('#myModal').on('hidden.bs.modal', function() {
+					//var date = new Date();
+					//date.setTime(date.getTime() + (60 * 60 * 1000));
+					//document.cookie = "mailingList=no; expires=" + date.toGMTString();
+					document.cookie = "mailingList=no; expires=0";
+				});
+			});
+		</script>
